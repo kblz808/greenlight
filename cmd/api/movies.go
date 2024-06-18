@@ -2,9 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/julienschmidt/httprouter"
 	"net/http"
-	"strconv"
 )
 
 func (app *application) createMovieHandler(w http.ResponseWriter, r *http.Request) {
