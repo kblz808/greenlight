@@ -12,16 +12,9 @@ func (app *application) healthcheckHandler(w http.ResponseWriter, r *http.Reques
 		"version":     version,
 	}
 
-	js, err := json.Marshal(data)
+	err := app.writeJSON(w, 200, data, nil)
 	if err != nil {
 		app.logger.Print(err)
 		http.Error(w, "internal server error", http.StatusInternalServerError)
-		return
 	}
-
-	js = append(js, '\n')
-
-	w.Header().Set("Content-Type", "application/json")
-
-	w.Write([]byte(js))
 }
