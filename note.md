@@ -1,8 +1,31 @@
-the `bin` direcotry will contain our compiled application binaries
+When PostgreSQL is freshly installed it only has one user account: a superuser called 
+`postgres`.
 
-the `cmd/api` directory will contain the application-specific code for the api
-this will include the code for running the server, reading and writing HTTP requests, and managing auth
 
-the `internal` directory will contain various packages used by our api
-it will contain the code for interacting with our database, doing data valdation, 
-sending emails and so on. (any code which isnt application specific and can be reused)
+During installation, an operating system user named postgres should also have been 
+created on your machine.
+
+`SELECT current_user` query to see which PostgreSQL user you currently are.
+
+`psql -U postgres`
+> connect to postgres with the username postgres
+
+`CREATE DATABASE greenlight;`
+> create a new database called greenlight
+
+`\c greenlight;`
+> connect to the greenlight database
+
+the `\` character indicates a meta command
+
+`\l`
+> list all databases
+
+`\dt`
+> list tables
+
+`\du`
+> list users
+
+`CREATE ROLE greenlighti WITH LOGIN PASSWORD 'pa55word';`
+> create a new role called greenlight
