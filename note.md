@@ -33,7 +33,7 @@ the `\` character indicates a meta command
 `CREATE ROLE greenlighti WITH LOGIN PASSWORD 'pa55word';`
 > create a new role called greenlight
 
----
+--- 6
 
 ## migrations
 For every change that you want to make to your database schema
@@ -86,3 +86,7 @@ example, to rollback the most recent migration you would run
 When you run a migration that contains an error, all SQL
 statements up to the erroneous one will be applied and then the
 migrate tool will exit with a message describing the error.
+
+--- 7
+
+
