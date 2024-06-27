@@ -165,3 +165,11 @@ we’ll need to interpolate these dynamic values into our query using
 
 it’s also important to be aware that the order of returned
 rows is only guaranteed by the rulesthat your `ORDER BY` clause imposes
+
+Within our application, we’ll just need to translate the `page` and `page_size` values provided
+by the client to the appropriate `LIMIT` and `OFFSET` values for our SQL query
+
+```sql
+LIMIT = page_size
+OFFSET = (page - 1) * page_size
+```
