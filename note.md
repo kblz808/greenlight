@@ -173,3 +173,8 @@ by the client to the appropriate `LIMIT` and `OFFSET` values for our SQL query
 LIMIT = page_size
 OFFSET = (page - 1) * page_size
 ```
+
+==
+
+The inclusion of the `count(*)` `OVER()` expression at the start of the query will result in the
+filtered record count being included as the first value in each row
