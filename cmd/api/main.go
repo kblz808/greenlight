@@ -4,10 +4,8 @@ import (
 	"context"
 	"database/sql"
 	"flag"
-	"fmt"
 	"greenlight/internal/data"
 	"greenlight/internal/jsonlog"
-	"net/http"
 	"os"
 	"time"
 
