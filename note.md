@@ -178,3 +178,21 @@ OFFSET = (page - 1) * page_size
 
 The inclusion of the `count(*)` `OVER()` expression at the start of the query will result in the
 filtered record count being included as the first value in each row
+
+--- 12
+
+|signal|description|shortcut|catchable|
+|---|---|---|---|
+|SIGINT|Interrupt from keyboard|Ctrl+C|Yes|
+|SIGQUIT|Quit from keyboard|Ctrl+\|Yes|
+|SIGKILL|Kill process (terminate immediately)|-|No|
+|SIGTERM|Terminate process in orderly manner|-|Yes|
+
+`pgrep -l api`
+> search for a running process called api
+
+`pkill -SIGKILL api`
+> send the SIGKILL signal to the api process
+
+`pkill -SIGTERM api`
+> send the SIGTERM signal to the api process
