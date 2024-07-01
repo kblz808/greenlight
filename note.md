@@ -213,3 +213,18 @@ CREATE TABLE IF NOT EXISTS tokens (
 We also use the `ON DELETE CASCADE` syntax to instruct PostgreSQL to automatically
 delete all recordsfor a user in our `tokens` table when the parent record in the users table
 is deleted.
+
+==
+
+```sql
+SELECT users.id, users.created_at, users.name, users.email, users.password_hash, users.activated, users.version
+FROM users
+INNER JOIN tokens
+ON users.id = tokens.user_id
+WHERE tokens.hash = $1
+AND tokens.scope = $2
+AND tokens.expiry > $3
+```
+
+we’re using the `ON users.id = tokens.user_id` clause to
+indicate that we want to join records where the user id value equalsthe token `user_id`
