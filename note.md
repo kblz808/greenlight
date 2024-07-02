@@ -233,3 +233,21 @@ indicate that we want to join records where the user id value equalsthe token `u
 
 Authentication is about confirming who a user is, whereas authorization is
 about checking whether that user is permitted to do something
+
+==
+
+If no Authorization header was provided at all, then we will add the details for an
+anonymous user to the request context instead.
+
+we'll be storing the user detailsin the request context.
+
++ Every http.Request that our apprication processes has a `context.Context` embedded in
+it, which we can use to store key/varue pairs containing arbitrary data during the lifetime
+of the request. In this case we want to store a User struct containing the current user’s
+information
+
++ Any values stored in the request context have the type any. This means that after
+retrieving a value from the request context you need to assert it back to its original type
+before using it.
+
+
