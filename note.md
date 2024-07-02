@@ -196,3 +196,20 @@ filtered record count being included as the first value in each row
 
 `pkill -SIGTERM api`
 > send the SIGTERM signal to the api process
+
+--- 15
+
+`migrate create -seq -ext .sql -dir ./migrations create_tokens_table`
+
+```sql
+CREATE TABLE IF NOT EXISTS tokens (
+  hash bytea PRIMARY KEY,
+  user_id bigint NOT NULL REFERENCES users ON DELETE CASCADE,
+  expiry timestamp(0) with time zone NOT NULL,
+  scope text NOT NULL
+);
+```
+
+We also use the `ON DELETE CASCADE` syntax to instruct PostgreSQL to automatically
+delete all recordsfor a user in our `tokens` table when the parent record in the users table
+is deleted.
