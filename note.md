@@ -228,3 +228,8 @@ AND tokens.expiry > $3
 
 we’re using the `ON users.id = tokens.user_id` clause to
 indicate that we want to join records where the user id value equalsthe token `user_id`
+
+--- 16
+
+Authentication is about confirming who a user is, whereas authorization is
+about checking whether that user is permitted to do something
