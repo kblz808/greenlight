@@ -250,4 +250,21 @@ information
 retrieving a value from the request context you need to assert it back to its original type
 before using it.
 
+--- 17
 
+The relationship between permissions and users is a great example of a many-to-many
+relationship. One user may have many permissions, and the same permission may belong
+to  many users.
+
+The classic way to manage a many-to-many relationship in a relational database like
+PostgreSQL is to create a joining table between the two entities.
+
+Then we can create a joining table called users_permissions to store the information about
+which users have which permissions.
+
+```
+PermissionModel.GetAllForUser(user) → Retrieve all permissions for a user
+UserModel.GetAllForPermission(permission) → Retrieve all users with a specific permission
+```
+
+the sql migrations: `migrate create -seq -ext .sql -dir ./migrations add_permissions`
