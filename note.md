@@ -268,3 +268,46 @@ UserModel.GetAllForPermission(permission) → Retrieve all users with a specific
 ```
 
 the sql migrations: `migrate create -seq -ext .sql -dir ./migrations add_permissions`
+
+--- 18
+
+if two URLs have the same scheme, host and port (if specified) they are said to
+share the same origin.
+
+|A|B|Same origin?|Reason|
+|---|---|---|---|
+|https://foo.com/a|http://foo.com/a|No|Different shcme (http vs https)|
+|http://foo.com/a|http://www.foo.com/a|No|Different host (foo.com vs www.foo.com)|
+|http://foo.com/a|http://foo.com:443/a|No|Different port (no port vs 443)|
+|http://foo.com/a|http://foo.com/b/|Yes|Only the path is different|
+|http://foo.com/a|http://foo.com/a?b=c|Yes|Only the query string is different|
+|http://foo.com/a#b|http://foo.com/a#c|Yes|Only the fragment is different|
+
+all web browsers implement a
+security mechanism known as the same-origin policy. 
+
++ A webpage on one origin can embed certain types of resources from another origin in
+  their HTML — including images, CSS, and JavaScript files.
+> `<img src="http://anotherorigin.com/example.png" alt="example image">`
+
++ A webpage on one origin can send data to a different origin. For example, it’s OK for a
+  HTML form in a webpage to submit data to a different origin.
+
++ But a webpage on one origin is not allowed to receive data from a different origin.
+
+the same-origin policy prevents a (potentially
+malicious) website on another origin from reading (possibly confidential) information from
+your website.
+
+let’s say that you have a webpage at https://foo.com containing some frontend JavaScript code. If this JavaScript tries to make an HTTP request to
+https://bar.com/data.json (a different origin), then the request will be sent and
+processed by the bar.com server, but the user’s web browser will block the response so that
+the JavaScript code from https://foo.com cannot see it.
+
+if you have an API at api.example.com and a trusted JavaScript front-end
+application running on www.example.com, then you’ll probably want to allow cross-origin
+requests from the trusted www.example.com domain to your API.
+
+he Access-Control-Allow-Origin response header is used to indicate to a browser that
+it’s OK to share a response with a different origin. 
+`Access-Control-Allow-Origini: *`
