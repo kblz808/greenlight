@@ -3,11 +3,13 @@ package main
 import (
 	"context"
 	"database/sql"
+
 	"flag"
 	"greenlight/internal/data"
 	"greenlight/internal/jsonlog"
 	"greenlight/internal/mailer"
 	"os"
+	"strings"
 	"sync"
 	"time"
 
@@ -36,6 +38,9 @@ type config struct {
 		username string
 		password string
 		sender   string
+	}
+	cors struct {
+		trustedOrigins []string
 	}
 }
 
@@ -67,6 +72,11 @@ func main() {
 	flag.StringVar(&cfg.smtp.username, "smtp-username", "8cc250d45f93cb", "SMTP username")
 	flag.StringVar(&cfg.smtp.password, "smtp-password", "398f950b095d90", "SMTP password")
 	flag.StringVar(&cfg.smtp.sender, "smtp-sender", "Greenlight <no-reply@greenlight.harof.net>", "SMTP sender")
+
+	flag.Func("cors-trusted-origins", "Trusted CORS origins (space separated)", func(val string) error {
+		cfg.cors.trustedOrigins = strings.Fields(val)
+		return nil
+	})
 
 	flag.Parse()
 
