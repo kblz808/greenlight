@@ -311,3 +311,7 @@ requests from the trusted www.example.com domain to your API.
 he Access-Control-Allow-Origin response header is used to indicate to a browser that
 it’s OK to share a response with a different origin. 
 `Access-Control-Allow-Origini: *`
+
+==
+
+`go run ./cmd/api -cors-trusted-origins="http://localhost:9000 http://localhost:9001"`
